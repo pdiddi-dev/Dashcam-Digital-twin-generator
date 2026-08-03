@@ -45,6 +45,21 @@ The committed sample under [`examples/dashcam_residential/`](examples/dashcam_re
 
 **What the USD stage renders:** ego red composite car at the origin, rows of composite cars flanking both sides on parking positions, one composite car offset to the left and rotated 180° (oncoming), a cyclist far down the road (torso + head + bike frame + wheels), asphalt road with double yellow center line, gray curbs, sidewalks, green lawn strips, 28 deterministically-jittered trees, and a warm directional sun matching the extracted azimuth.
 
+## Fleet search (bonus)
+
+Once you've generated a few twins, you can semantically search across them with NVIDIA's NeMo Retriever:
+
+```bash
+python build_twin.py clip_a.mp4
+python build_twin.py clip_b.mp4
+python fleet_search.py index                              # embed all twins/*/scene.json
+python fleet_search.py query "oncoming vehicles in rain"  # cosine-sim search
+```
+
+Uses `nvidia/nemotron-3-embed-1b` (2048-dim vectors) via the hosted API, plus a tiny numpy cosine-similarity backend — no vector DB dependency. See [`fleet_search.py`](fleet_search.py).
+
+The demo in this repo ships with N=1 because there's only one dashcam clip committed. The point is the shape of the pipeline; at N=1000 it's the beginning of a queryable fleet.
+
 ## Files
 
 | File | Purpose |
@@ -52,9 +67,11 @@ The committed sample under [`examples/dashcam_residential/`](examples/dashcam_re
 | [`build_twin.py`](build_twin.py) | CLI orchestrator. `python build_twin.py <clip> [-o out/] [--dry-run]` |
 | [`scene_extractor.py`](scene_extractor.py) | Stage 1. Prompts the VLM for schema-constrained JSON, validates with Pydantic. |
 | [`usd_builder.py`](usd_builder.py) | Stage 2. Maps qualitative positions to USD prims (ego, actors, ground, lane stripes, sidewalks, trees, sky). |
-| [`nvidia_client.py`](nvidia_client.py) | Shared: base64-encoding, API auth, model constant. |
+| [`fleet_search.py`](fleet_search.py) | Extension. Embed many extracted scenes with NeMo Retriever; natural-language search. |
+| [`nvidia_client.py`](nvidia_client.py) | Shared: base64-encoding, API auth, model + embed-model constants. |
 | [`analyze.py`](analyze.py) | Simple companion: video → freeform prose description (the first thing built while exploring the API). |
 | [`docs/CASE_STUDY.md`](docs/CASE_STUDY.md) | Written case study — the problem, the enablement recipe, the metrics. |
+| [`docs/demo_shot_list.md`](docs/demo_shot_list.md) | Shot list for the ~60-second screen recording that becomes `docs/demo.gif`. |
 
 ## Model choice — a small saga
 
@@ -74,7 +91,7 @@ The originally-targeted `nvidia/cosmos3-nano-reasoner` is a **NIM-container rele
 - **Cosmos Predict variations** — regenerate the same scene at night / in rain / with an added pedestrian for corner-case augmentation.
 - **NVCF Asset upload** for videos >25 MB.
 - **Frame-by-frame extraction** with a lightweight tracking pass for actor animation.
-- **NeMo Retriever + Guardrails** — index many extracted scenes and RAG-query the fleet ("show me all oncoming-vehicle scenes in rain").
+- **NeMo Guardrails** on top of `fleet_search.py` for output safety (redact PII from prose, restrict scene-topic queries).
 - **Reference USD vehicle assets** so partners can preview with production geometry without wiring in their own library first.
 
 ## License

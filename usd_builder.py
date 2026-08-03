@@ -223,11 +223,14 @@ def _add_ego(stage):
     cam.CreateFocalLengthAttr(24.0)
 
 
-def _place_actor(stage, actor: Actor, index: int) -> None:
+def _place_actor(stage, actor: Actor, index: int, parked_index: int | None = None) -> None:
     x_off, z_dir = LANE_LAYOUT.get(actor.lane, (0.0, 1))
     z = DISTANCE_M[actor.distance_qualitative] * z_dir
-    if actor.lane.startswith("parked_"):
-        z = -30.0 + index * 6.0
+    if actor.lane.startswith("parked_") and parked_index is not None:
+        # Space parked cars along Z using their position among *parked-only* actors,
+        # not the global actor index — otherwise non-parked actors gap the row and
+        # push a later parked car onto z=0 (colliding with the ego).
+        z = -30.0 + parked_index * 6.0
 
     color = _color_for(actor.color)
     path = f"/World/Actors/Actor_{index:03d}_{actor.type}"
@@ -308,8 +311,13 @@ def build_stage(scene: Scene, out_path: Path) -> Path:
     _add_sidewalks_and_curbs(stage, scene.environment.road_type)
     _add_lane_stripes(stage, scene.environment.lanes, scene.environment.road_type)
     _add_ego(stage)
+    parked_seen = 0
     for i, actor in enumerate(scene.actors):
-        _place_actor(stage, actor, i)
+        parked_i = None
+        if actor.lane.startswith("parked_"):
+            parked_i = parked_seen
+            parked_seen += 1
+        _place_actor(stage, actor, i, parked_i)
     _add_environment_features(stage, scene.environment_features)
     _add_lighting(stage, scene)
 

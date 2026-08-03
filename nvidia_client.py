@@ -10,6 +10,7 @@ from openai import OpenAI
 
 BASE_URL = "https://integrate.api.nvidia.com/v1"
 MODEL = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+EMBED_MODEL = "nvidia/nemotron-3-embed-1b"
 MAX_INLINE_BYTES = 25 * 1024 * 1024
 
 

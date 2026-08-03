@@ -611,7 +611,7 @@ def Xform "World" (
 
         def Xform "Actor_005_car"
         {
-            double3 xformOp:translate = (-5.25, 0, 0)
+            double3 xformOp:translate = (-5.25, 0, -6)
             uniform token[] xformOpOrder = ["xformOp:translate"]
 
             def Cube "Body"
