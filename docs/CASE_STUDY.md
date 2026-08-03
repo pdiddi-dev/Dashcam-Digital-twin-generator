@@ -2,7 +2,7 @@
 
 ## The problem
 
-Fleet operators, robotaxi programs, and OEM safety teams collectively record **billions of hours** of dashcam footage every year. Almost none of it is directly usable by the tools that would benefit from it most: **simulation and scenario-testing platforms**. Video is a lossy, unstructured medium; a scenario engine expects a scene graph — actors, positions, lanes, weather, ego state — in a schema it can consume.
+Fleet operators, robotaxi programs, and OEM safety teams collectively record **billions of hours** of dashcam footage every year. Almost none of it is directly usable by the tools that would benefit from it most: **simulation and scenario-testing platforms**. Video is a lossy, unstructured medium; a scenario engine expects a scene graph -actors, positions, lanes, weather, ego state - in a schema it can consume.
 
 The consequence: safety engineers rediscover the same corner cases over and over from telemetry alone, and iSVs building AV testing tools ship without a natural on-ramp for a partner's existing video assets.
 
@@ -31,7 +31,7 @@ dashcam.mp4  ─►  [ NVIDIA hosted VLM ]  ─►  scene.json  ─►  [ USD bu
                  (schema-constrained)      (contract)      (deterministic)      (Omniverse-ready)
 ```
 
-**Stage 1 — extraction.** Base64-inline the clip, one hosted-API call to a Cosmos-family reasoning model, JSON-schema-constrained prompt, Pydantic validation. The output is a small, diff-able, schema-versionable scene contract — not a black-box embedding.
+**Stage 1 — extraction.** Base64-inline the clip, one hosted-API call to a Cosmos-family reasoning model, JSON-schema-constrained prompt, Pydantic validation. The output is a small, diff-able, schema-versionable scene contract - not a black-box embedding.
 
 **Stage 2 — composition.** Deterministic Python that maps the qualitative scene contract onto an OpenUSD stage (ego, actors, road geometry, sidewalks, curbs, trees, sun angle, sky). Human-readable ASCII `.usda`, opens in Omniverse USD Composer, Reality Composer Pro, Blender, or `usdview`.
 
