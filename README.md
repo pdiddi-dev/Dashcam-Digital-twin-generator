@@ -1,6 +1,6 @@
 # Dashcam → Digital Twin
 
-Turn a real dashcam clip into an OpenUSD scenario an Omniverse-compatible simulator can consume — in one command, ~600 lines of Python.
+Turn a real dashcam clip into an OpenUSD scenario an Omniverse-compatible simulator can consume - in one command, ~600 lines of Python.
 
 Built with [NVIDIA Cosmos-family reasoning VLMs](https://build.nvidia.com/nvidia/cosmos3-nano-reasoner) (via the hosted API on build.nvidia.com) and [OpenUSD](https://openusd.org/). Runs from a laptop; no GPU required on the client.
 
