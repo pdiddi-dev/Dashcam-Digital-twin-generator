@@ -4,6 +4,10 @@ Turn a real dashcam clip into an OpenUSD scenario an Omniverse-compatible simula
 
 Built with [NVIDIA Cosmos-family reasoning VLMs](https://build.nvidia.com/nvidia/cosmos3-nano-reasoner) (via the hosted API on build.nvidia.com) and [OpenUSD](https://openusd.org/). Runs from a laptop; no GPU required on the client.
 
+![USD stage reconstructed from a residential-street dashcam clip: red ego car, black oncoming vehicle, rows of parked cars, double-yellow centerline, sidewalks, trees, and green lawn strips](docs/hero.png)
+
+*Above: the USD stage generated from a ~13-second real dashcam clip of a sunny residential street. Every element — road geometry, actors, positions, sun angle — is derived from a single hosted-API call to the VLM. Committed sample lives under [`examples/dashcam_residential/`](examples/dashcam_residential/).*
+
 > 📄 **Read the [case study](docs/CASE_STUDY.md)** — why this pipeline exists, who it enables, and what a first-week partner onboarding looks like.
 
 ## The 30-second pitch
