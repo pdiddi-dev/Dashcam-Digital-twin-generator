@@ -77,7 +77,7 @@ The demo in this repo ships with N=1 because there's only one dashcam clip commi
 
 The prototype uses `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` via `https://integrate.api.nvidia.com/v1` (OpenAI-compatible).
 
-The originally-targeted `nvidia/cosmos3-nano-reasoner` is a **NIM-container release** — needs Linux + NVIDIA GPU, so not runnable on a Mac client. `nvidia/cosmos-reason2-8b` is listed in the hosted `/v1/models` catalog but its NVCF function is **not entitled** to a fresh build.nvidia.com account — a subtle gotcha (the `/v1/models` listing is misleading; use `GET /v2/nvcf/functions` to see what your account can actually invoke). Nemotron-Omni is entitled by default, handles video, and is the pragmatic choice for a hosted-API demo. Everything the pipeline does is model-agnostic: swap `MODEL` in `nvidia_client.py` when Cosmos3 becomes hosted or you're running your own NIM.
+The originally-targeted `nvidia/cosmos3-nano-reasoner` is a **NIM-container release** — needs Linux + NVIDIA GPU, so not runnable on a Mac client. `nvidia/cosmos-reason2-8b` is listed in the hosted `/v1/models` catalog but its NVCF function is **not entitled** to a fresh build.nvidia.com account - a subtle gotcha (the `/v1/models` listing is misleading; use `GET /v2/nvcf/functions` to see what your account can actually invoke). Nemotron-Omni is entitled by default, handles video, and is the pragmatic choice for a hosted-API demo. Everything the pipeline does is model-agnostic: swap `MODEL` in `nvidia_client.py` when Cosmos3 becomes hosted or you're running your own NIM.
 
 ## Limits (deliberate)
 
@@ -88,7 +88,7 @@ The originally-targeted `nvidia/cosmos3-nano-reasoner` is a **NIM-container rele
 
 ## Roadmap
 
-- **Cosmos Predict variations** — regenerate the same scene at night / in rain / with an added pedestrian for corner-case augmentation.
+- **Cosmos Predict variations** —regenerate the same scene at night / in rain / with an added pedestrian for corner-case augmentation.
 - **NVCF Asset upload** for videos >25 MB.
 - **Frame-by-frame extraction** with a lightweight tracking pass for actor animation.
 - **NeMo Guardrails** on top of `fleet_search.py` for output safety (redact PII from prose, restrict scene-topic queries).
