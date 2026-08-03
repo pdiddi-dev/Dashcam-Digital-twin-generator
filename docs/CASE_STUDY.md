@@ -1,4 +1,4 @@
-# Case study — from dashcam to digital twin
+# Case study - from dashcam to digital twin
 
 ## The problem
 
