@@ -1,0 +1,16 @@
+.env
+venv/
+__pycache__/
+*.pyc
+*.mp4
+*.mov
+*.MOV
+*.mkv
+.DS_Store
+
+# Generated per-run outputs
+twins/
+
+# But keep the committed sample
+!examples/
+!examples/**

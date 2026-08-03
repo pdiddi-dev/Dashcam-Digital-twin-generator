@@ -1,0 +1,1255 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "World" (
+    customData = {
+        string sceneJson = '''{
+  "environment": {
+    "road_type": "residential",
+    "lanes": 2,
+    "weather": "clear",
+    "time_of_day": "day",
+    "sun_azimuth_deg": 90
+  },
+  "ego": {
+    "speed_qualitative": "moderate",
+    "heading": "straight"
+  },
+  "actors": [
+    {
+      "type": "van",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "white",
+      "notable": "flatbed"
+    },
+    {
+      "type": "car",
+      "lane": "parked_right",
+      "distance_qualitative": "close",
+      "color": "red",
+      "notable": "parked"
+    },
+    {
+      "type": "car",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "white",
+      "notable": "parked"
+    },
+    {
+      "type": "car",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "red",
+      "notable": "parked"
+    },
+    {
+      "type": "car",
+      "lane": "oncoming_left",
+      "distance_qualitative": "medium",
+      "color": "black",
+      "notable": "approaching and passes"
+    },
+    {
+      "type": "car",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "black",
+      "notable": "parked"
+    },
+    {
+      "type": "cyclist",
+      "lane": "same_ahead",
+      "distance_qualitative": "far",
+      "color": "black",
+      "notable": "riding away"
+    }
+  ],
+  "environment_features": [
+    {
+      "type": "trees",
+      "side": "left"
+    },
+    {
+      "type": "trees",
+      "side": "right"
+    },
+    {
+      "type": "buildings",
+      "side": "left"
+    },
+    {
+      "type": "buildings",
+      "side": "right"
+    },
+    {
+      "type": "barrier",
+      "side": "right"
+    },
+    {
+      "type": "signs",
+      "side": "right"
+    },
+    {
+      "type": "streetlights",
+      "side": "left"
+    }
+  ],
+  "summary": "Driving down a sunny residential street lined with parked cars, passing a black oncoming vehicle and a cyclist in the distance."
+}'''
+        string summary = "Driving down a sunny residential street lined with parked cars, passing a black oncoming vehicle and a cyclist in the distance."
+    }
+)
+{
+    def Cube "Ground"
+    {
+        color3f[] primvars:displayColor = [(0.22, 0.22, 0.24)]
+        float3 xformOp:scale = (50, 0.05, 120)
+        double3 xformOp:translate = (0, -0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "Lawn_L"
+    {
+        color3f[] primvars:displayColor = [(0.2, 0.35, 0.15)]
+        float3 xformOp:scale = (23, 0.025, 120)
+        double3 xformOp:translate = (-27, -0.02, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "Lawn_R"
+    {
+        color3f[] primvars:displayColor = [(0.2, 0.35, 0.15)]
+        float3 xformOp:scale = (23, 0.025, 120)
+        double3 xformOp:translate = (27, -0.02, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "Curb_L"
+    {
+        color3f[] primvars:displayColor = [(0.72, 0.72, 0.72)]
+        float3 xformOp:scale = (0.075, 0.075, 120)
+        double3 xformOp:translate = (-3.6, 0.075, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "Curb_R"
+    {
+        color3f[] primvars:displayColor = [(0.72, 0.72, 0.72)]
+        float3 xformOp:scale = (0.075, 0.075, 120)
+        double3 xformOp:translate = (3.6, 0.075, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "Sidewalk_L"
+    {
+        color3f[] primvars:displayColor = [(0.62, 0.62, 0.62)]
+        float3 xformOp:scale = (1.25, 0.05, 120)
+        double3 xformOp:translate = (-4.925, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "Sidewalk_R"
+    {
+        color3f[] primvars:displayColor = [(0.62, 0.62, 0.62)]
+        float3 xformOp:scale = (1.25, 0.05, 120)
+        double3 xformOp:translate = (4.925, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "CenterLine_A"
+    {
+        color3f[] primvars:displayColor = [(0.95, 0.85, 0.15)]
+        float3 xformOp:scale = (0.05, 0.01, 120)
+        double3 xformOp:translate = (-0.1, 0.015, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "CenterLine_B"
+    {
+        color3f[] primvars:displayColor = [(0.95, 0.85, 0.15)]
+        float3 xformOp:scale = (0.05, 0.01, 120)
+        double3 xformOp:translate = (0.1, 0.015, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Xform "Ego"
+    {
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "Body"
+        {
+            color3f[] primvars:displayColor = [(0.78, 0.1, 0.1)]
+            float3 xformOp:scale = (0.9, 0.4125, 2.25)
+            double3 xformOp:translate = (0, 0.41250000000000003, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "Cabin"
+        {
+            color3f[] primvars:displayColor = [(0.585, 0.075, 0.075)]
+            float3 xformOp:scale = (0.828, 0.3375, 1.2375)
+            double3 xformOp:translate = (0, 1.1625, -0.225)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "Windshield"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+            float3 xformOp:scale = (0.7866, 0.286875, 0.04)
+            double3 xformOp:translate = (0, 1.1625, 1.0525)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Wheel_FL"
+        {
+            uniform token axis = "X"
+            double height = 0.2
+            color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+            double radius = 0.36
+            double3 xformOp:translate = (-0.85, 0.36, 1.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Wheel_FR"
+        {
+            uniform token axis = "X"
+            double height = 0.2
+            color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+            double radius = 0.36
+            double3 xformOp:translate = (0.85, 0.36, 1.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Wheel_RL"
+        {
+            uniform token axis = "X"
+            double height = 0.2
+            color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+            double radius = 0.36
+            double3 xformOp:translate = (-0.85, 0.36, -1.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Wheel_RR"
+        {
+            uniform token axis = "X"
+            double height = 0.2
+            color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+            double radius = 0.36
+            double3 xformOp:translate = (0.85, 0.36, -1.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def Camera "DashCam"
+    {
+        float focalLength = 24
+        float xformOp:rotateY = 180
+        double3 xformOp:translate = (0, 1.25, 1.75)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY"]
+    }
+
+    def "Actors"
+    {
+        def Xform "Actor_000_van"
+        {
+            double3 xformOp:translate = (-5.25, 0, -30)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cube "Body"
+            {
+                color3f[] primvars:displayColor = [(0.92, 0.92, 0.92)]
+                float3 xformOp:scale = (1, 0.605, 2.75)
+                double3 xformOp:translate = (0, 0.6050000000000001, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Cabin"
+            {
+                color3f[] primvars:displayColor = [(0.69, 0.69, 0.69)]
+                float3 xformOp:scale = (0.92, 0.495, 1.5125)
+                double3 xformOp:translate = (0, 1.7050000000000003, -0.275)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Windshield"
+            {
+                color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+                float3 xformOp:scale = (0.874, 0.42075, 0.04)
+                double3 xformOp:translate = (0, 1.7050000000000003, 1.2775000000000003)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_FL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.95, 0.36, 2)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_FR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.95, 0.36, 2)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.95, 0.36, -2)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.95, 0.36, -2)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+
+        def Xform "Actor_001_car"
+        {
+            double3 xformOp:translate = (5.25, 0, -24)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cube "Body"
+            {
+                color3f[] primvars:displayColor = [(0.75, 0.1, 0.1)]
+                float3 xformOp:scale = (0.9, 0.4125, 2.25)
+                double3 xformOp:translate = (0, 0.41250000000000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Cabin"
+            {
+                color3f[] primvars:displayColor = [(0.5625, 0.075, 0.075)]
+                float3 xformOp:scale = (0.828, 0.3375, 1.2375)
+                double3 xformOp:translate = (0, 1.1625, -0.225)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Windshield"
+            {
+                color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+                float3 xformOp:scale = (0.7866, 0.286875, 0.04)
+                double3 xformOp:translate = (0, 1.1625, 1.0525)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_FL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_FR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+
+        def Xform "Actor_002_car"
+        {
+            double3 xformOp:translate = (-5.25, 0, -18)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cube "Body"
+            {
+                color3f[] primvars:displayColor = [(0.92, 0.92, 0.92)]
+                float3 xformOp:scale = (0.9, 0.4125, 2.25)
+                double3 xformOp:translate = (0, 0.41250000000000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Cabin"
+            {
+                color3f[] primvars:displayColor = [(0.69, 0.69, 0.69)]
+                float3 xformOp:scale = (0.828, 0.3375, 1.2375)
+                double3 xformOp:translate = (0, 1.1625, -0.225)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Windshield"
+            {
+                color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+                float3 xformOp:scale = (0.7866, 0.286875, 0.04)
+                double3 xformOp:translate = (0, 1.1625, 1.0525)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_FL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_FR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+
+        def Xform "Actor_003_car"
+        {
+            double3 xformOp:translate = (-5.25, 0, -12)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cube "Body"
+            {
+                color3f[] primvars:displayColor = [(0.75, 0.1, 0.1)]
+                float3 xformOp:scale = (0.9, 0.4125, 2.25)
+                double3 xformOp:translate = (0, 0.41250000000000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Cabin"
+            {
+                color3f[] primvars:displayColor = [(0.5625, 0.075, 0.075)]
+                float3 xformOp:scale = (0.828, 0.3375, 1.2375)
+                double3 xformOp:translate = (0, 1.1625, -0.225)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Windshield"
+            {
+                color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+                float3 xformOp:scale = (0.7866, 0.286875, 0.04)
+                double3 xformOp:translate = (0, 1.1625, 1.0525)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_FL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_FR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+
+        def Xform "Actor_004_car"
+        {
+            float xformOp:rotateY = 180
+            double3 xformOp:translate = (-3.5, 0, 25)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY"]
+
+            def Cube "Body"
+            {
+                color3f[] primvars:displayColor = [(0.06, 0.06, 0.07)]
+                float3 xformOp:scale = (0.9, 0.4125, 2.25)
+                double3 xformOp:translate = (0, 0.41250000000000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Cabin"
+            {
+                color3f[] primvars:displayColor = [(0.045, 0.045, 0.0525)]
+                float3 xformOp:scale = (0.828, 0.3375, 1.2375)
+                double3 xformOp:translate = (0, 1.1625, -0.225)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Windshield"
+            {
+                color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+                float3 xformOp:scale = (0.7866, 0.286875, 0.04)
+                double3 xformOp:translate = (0, 1.1625, 1.0525)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_FL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_FR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+
+        def Xform "Actor_005_car"
+        {
+            double3 xformOp:translate = (-5.25, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cube "Body"
+            {
+                color3f[] primvars:displayColor = [(0.06, 0.06, 0.07)]
+                float3 xformOp:scale = (0.9, 0.4125, 2.25)
+                double3 xformOp:translate = (0, 0.41250000000000003, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Cabin"
+            {
+                color3f[] primvars:displayColor = [(0.045, 0.045, 0.0525)]
+                float3 xformOp:scale = (0.828, 0.3375, 1.2375)
+                double3 xformOp:translate = (0, 1.1625, -0.225)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Windshield"
+            {
+                color3f[] primvars:displayColor = [(0.12, 0.18, 0.28)]
+                float3 xformOp:scale = (0.7866, 0.286875, 0.04)
+                double3 xformOp:translate = (0, 1.1625, 1.0525)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_FL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_FR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, 1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RL"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (-0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_RR"
+            {
+                uniform token axis = "X"
+                double height = 0.2
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.36
+                double3 xformOp:translate = (0.85, 0.36, -1.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+
+        def Xform "Actor_006_cyclist"
+        {
+            double3 xformOp:translate = (0, 0, 55)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cube "Torso"
+            {
+                color3f[] primvars:displayColor = [(0.06, 0.06, 0.07)]
+                float3 xformOp:scale = (0.225, 0.375, 0.14)
+                double3 xformOp:translate = (0, 1.15, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Sphere "Head"
+            {
+                color3f[] primvars:displayColor = [(0.048, 0.048, 0.056)]
+                double radius = 0.13
+                double3 xformOp:translate = (0, 1.72, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cube "Frame"
+            {
+                color3f[] primvars:displayColor = [(0.2, 0.2, 0.2)]
+                float3 xformOp:scale = (0.025, 0.275, 0.55)
+                double3 xformOp:translate = (0, 0.55, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cylinder "Wheel_F"
+            {
+                uniform token axis = "X"
+                double height = 0.05
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.35
+                double3 xformOp:translate = (0, 0.35, 0.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Cylinder "Wheel_R"
+            {
+                uniform token axis = "X"
+                double height = 0.05
+                color3f[] primvars:displayColor = [(0.07, 0.07, 0.07)]
+                double radius = 0.35
+                double3 xformOp:translate = (0, 0.35, -0.5)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+        }
+    }
+
+    def "Trees"
+    {
+        def Cylinder "Trunk_L_000"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-10.416666666666666, 1.5, -82.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_000"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6
+            double3 xformOp:translate = (-10.416666666666666, 4.3, -82.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_001"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-9.783333333333333, 1.5, -68.95)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_001"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.804
+            double3 xformOp:translate = (-9.783333333333333, 4.402, -68.95)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_002"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-9.15, 1.5, -55.4)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_002"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.608
+            double3 xformOp:translate = (-9.15, 4.304, -55.4)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_003"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-8.516666666666667, 1.5, -41.85)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_003"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.812
+            double3 xformOp:translate = (-8.516666666666667, 4.406, -41.85)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_004"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-7.883333333333333, 1.5, -33.3)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_004"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.616
+            double3 xformOp:translate = (-7.883333333333333, 4.308, -33.3)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_005"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-7.25, 1.5, -19.75)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_005"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.82
+            double3 xformOp:translate = (-7.25, 4.41, -19.75)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_006"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-9.95, 1.5, -6.2)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_006"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.624
+            double3 xformOp:translate = (-9.95, 4.312, -6.2)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_007"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-9.316666666666666, 1.5, 2.35)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_007"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.828
+            double3 xformOp:translate = (-9.316666666666666, 4.414, 2.35)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_008"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-8.683333333333334, 1.5, 15.9)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_008"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6320000000000001
+            double3 xformOp:translate = (-8.683333333333334, 4.316, 15.9)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_009"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-8.05, 1.5, 29.45)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_009"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.836
+            double3 xformOp:translate = (-8.05, 4.418, 29.45)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_010"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-7.416666666666667, 1.5, 38)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_010"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6400000000000001
+            double3 xformOp:translate = (-7.416666666666667, 4.32, 38)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_011"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-10.116666666666667, 1.5, 51.55)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_011"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.844
+            double3 xformOp:translate = (-10.116666666666667, 4.422, 51.55)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_012"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-9.483333333333333, 1.5, 65.1)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_012"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6480000000000001
+            double3 xformOp:translate = (-9.483333333333333, 4.324, 65.1)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_L_013"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (-8.85, 1.5, 73.65)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_L_013"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.852
+            double3 xformOp:translate = (-8.85, 4.426, 73.65)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_000"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (7.083333333333333, 1.5, -82.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_000"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6
+            double3 xformOp:translate = (7.083333333333333, 4.3, -82.5)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_001"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (7.716666666666667, 1.5, -68.95)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_001"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.804
+            double3 xformOp:translate = (7.716666666666667, 4.402, -68.95)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_002"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (8.35, 1.5, -55.4)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_002"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.608
+            double3 xformOp:translate = (8.35, 4.304, -55.4)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_003"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (8.983333333333333, 1.5, -41.85)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_003"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.812
+            double3 xformOp:translate = (8.983333333333333, 4.406, -41.85)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_004"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (9.616666666666667, 1.5, -33.3)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_004"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.616
+            double3 xformOp:translate = (9.616666666666667, 4.308, -33.3)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_005"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (10.25, 1.5, -19.75)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_005"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.82
+            double3 xformOp:translate = (10.25, 4.41, -19.75)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_006"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (7.55, 1.5, -6.2)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_006"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.624
+            double3 xformOp:translate = (7.55, 4.312, -6.2)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_007"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (8.183333333333334, 1.5, 2.35)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_007"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.828
+            double3 xformOp:translate = (8.183333333333334, 4.414, 2.35)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_008"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (8.816666666666666, 1.5, 15.9)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_008"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6320000000000001
+            double3 xformOp:translate = (8.816666666666666, 4.316, 15.9)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_009"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (9.45, 1.5, 29.45)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_009"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.836
+            double3 xformOp:translate = (9.45, 4.418, 29.45)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_010"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (10.083333333333334, 1.5, 38)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_010"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6400000000000001
+            double3 xformOp:translate = (10.083333333333334, 4.32, 38)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_011"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (7.383333333333333, 1.5, 51.55)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_011"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.844
+            double3 xformOp:translate = (7.383333333333333, 4.422, 51.55)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_012"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (8.016666666666667, 1.5, 65.1)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_012"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.6480000000000001
+            double3 xformOp:translate = (8.016666666666667, 4.324, 65.1)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "Trunk_R_013"
+        {
+            uniform token axis = "Y"
+            double height = 3
+            color3f[] primvars:displayColor = [(0.35, 0.2, 0.1)]
+            double radius = 0.2
+            double3 xformOp:translate = (8.65, 1.5, 73.65)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Sphere "Crown_R_013"
+        {
+            color3f[] primvars:displayColor = [(0.15, 0.55, 0.2)]
+            double radius = 1.852
+            double3 xformOp:translate = (8.65, 4.426, 73.65)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def DomeLight "Sky"
+    {
+        color3f inputs:color = (1, 0.95, 0.85)
+        float inputs:intensity = 225
+    }
+
+    def DistantLight "Sun"
+    {
+        color3f inputs:color = (1, 0.95, 0.85)
+        float inputs:intensity = 4500
+        float xformOp:rotateX = -55
+        float xformOp:rotateY = 90
+        uniform token[] xformOpOrder = ["xformOp:rotateY", "xformOp:rotateX"]
+    }
+}
+

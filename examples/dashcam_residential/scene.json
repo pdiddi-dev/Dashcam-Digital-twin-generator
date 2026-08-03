@@ -1,0 +1,95 @@
+{
+  "environment": {
+    "road_type": "residential",
+    "lanes": 2,
+    "weather": "clear",
+    "time_of_day": "day",
+    "sun_azimuth_deg": 90
+  },
+  "ego": {
+    "speed_qualitative": "moderate",
+    "heading": "straight"
+  },
+  "actors": [
+    {
+      "type": "van",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "white",
+      "notable": "flatbed"
+    },
+    {
+      "type": "car",
+      "lane": "parked_right",
+      "distance_qualitative": "close",
+      "color": "red",
+      "notable": "parked"
+    },
+    {
+      "type": "car",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "white",
+      "notable": "parked"
+    },
+    {
+      "type": "car",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "red",
+      "notable": "parked"
+    },
+    {
+      "type": "car",
+      "lane": "oncoming_left",
+      "distance_qualitative": "medium",
+      "color": "black",
+      "notable": "approaching and passes"
+    },
+    {
+      "type": "car",
+      "lane": "parked_left",
+      "distance_qualitative": "close",
+      "color": "black",
+      "notable": "parked"
+    },
+    {
+      "type": "cyclist",
+      "lane": "same_ahead",
+      "distance_qualitative": "far",
+      "color": "black",
+      "notable": "riding away"
+    }
+  ],
+  "environment_features": [
+    {
+      "type": "trees",
+      "side": "left"
+    },
+    {
+      "type": "trees",
+      "side": "right"
+    },
+    {
+      "type": "buildings",
+      "side": "left"
+    },
+    {
+      "type": "buildings",
+      "side": "right"
+    },
+    {
+      "type": "barrier",
+      "side": "right"
+    },
+    {
+      "type": "signs",
+      "side": "right"
+    },
+    {
+      "type": "streetlights",
+      "side": "left"
+    }
+  ],
+  "summary": "Driving down a sunny residential street lined with parked cars, passing a black oncoming vehicle and a cyclist in the distance."
+}
